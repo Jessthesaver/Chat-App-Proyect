@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fronttoback-deployment
+  labels:
+    app: fronttoback
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fronttoback
+  template:
+    metadata:
+      labels:
+        app: fronttoback
+    spec:
+      containers:
+        - name: fronttoback
+          image: jessthesaver/fronttoback
+          env:
+            - name: PORT
+              value: "3500"
+            - name: API_AUTH
+              value: http://authservices-svc:3001
+            - name: API_USERS
+              value: http://usersservices-svc:3002
+            - name: API_CHAT
+              value: http://chatservices-svc:3003
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"

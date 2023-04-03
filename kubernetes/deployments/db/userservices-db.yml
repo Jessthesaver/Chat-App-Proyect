@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userservices-db-deployment
+  labels:
+    app: userservices-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: userservices-db
+  template:
+    metadata:
+      labels:
+        app: userservices-db
+    spec:
+      volumes:
+        - name: userservices-volume
+          persistentVolumeClaim:
+            claimName: userservices-pvc
+      containers:
+        - name: mongo
+          image: mongo
+          volumeMounts:
+            - mountPath: /data/db
+              name: userservices-volume
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 27017

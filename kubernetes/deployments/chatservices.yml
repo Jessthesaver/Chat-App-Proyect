@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatservices-deployment
+  labels:
+    app: chatservices
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chatservices
+  template:
+    metadata:
+      labels:
+        app: chatservices
+    spec:
+      containers:
+        - name: chatservices
+          image: jessthesaver/chatservices
+          env:
+            - name: MONGO_URL
+              value: mongodb://chatservices-db-svc:27017/
+            - name: PORT
+              value: "3003"
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"

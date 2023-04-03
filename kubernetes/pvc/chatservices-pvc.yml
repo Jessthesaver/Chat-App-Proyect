@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: chatservices-pvc
+  labels:
+    app: chatservices-db
+spec:
+  storageClassName: db-storage-class
+  resources:
+    requests:
+      storage: 512Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce

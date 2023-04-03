@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  labels:
+    app: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      volumes:
+        - name: nginx-configmap-volume
+          configMap:
+            name: nginx-configmap
+        - name: nginx-configmap-ssl-crt-volume
+          configMap:
+            name: ssl-crt-configmap
+        - name: nginx-configmap-ssl-key-volume
+          secret:
+            secretName: ssl-key-secret
+      containers:
+        - name: frontend
+          image: jessthesaver/frontend
+          volumeMounts:
+            - mountPath: /etc/nginx/conf.d/
+              name: nginx-configmap-volume
+            - mountPath: /etc/ssl/certs/
+              name: nginx-configmap-ssl-crt-volume
+            - mountPath: /etc/ssl/private/
+              name: nginx-configmap-ssl-key-volume
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
