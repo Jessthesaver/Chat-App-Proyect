@@ -21,8 +21,8 @@ spec:
             - name: SECRET_TOKEN
               valueFrom:
                 secretKeyRef:
-                name: jwt-secret
-                key: token
+                  name: jwt-secret
+                  key: token
             - name: MONGO_URL
               value: mongodb://authservices-db-svc:27017/
             - name: PORT
