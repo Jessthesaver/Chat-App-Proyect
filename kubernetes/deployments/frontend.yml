@@ -27,12 +27,13 @@ spec:
       containers:
         - name: frontend
           image: jessthesaver/frontend
+          #command: ["tail", "-f", "/dev/null"]
           volumeMounts:
-            - mountPath: /etc/nginx/conf.d/
+            - mountPath: /etc/nginx/conf.d
               name: nginx-configmap-volume
-            - mountPath: /etc/ssl/certs/
+            - mountPath: /etc/ssl/certs
               name: nginx-configmap-ssl-crt-volume
-            - mountPath: /etc/ssl/private/
+            - mountPath: /etc/ssl/private
               name: nginx-configmap-ssl-key-volume
           resources:
             limits:

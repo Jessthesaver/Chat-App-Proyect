@@ -21,8 +21,8 @@ spec:
             - name: MONGO_URL
               value: mongodb://chatservices-db-svc:27017/
             - name: PORT
-              value: "3003"
+              value: "4500"
           resources:
             limits:
-              memory: "128Mi"
+              memory: "256Mi"
               cpu: "500m"

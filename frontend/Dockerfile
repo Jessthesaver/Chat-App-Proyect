@@ -2,7 +2,7 @@ FROM node:18 AS base
 
 WORKDIR /user/src/app
 
-COPY package.json .
+COPY package*.json .
 
 RUN npm install
 
@@ -12,7 +12,7 @@ RUN npm run build
 
 FROM nginx:1.23.2
 
-COPY --from=base /user/src/app/build /user/share/nginx/html
+COPY --from=base /user/src/app/build /usr/share/nginx/html
 
 EXPOSE 3000
 

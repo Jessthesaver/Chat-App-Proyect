@@ -7,5 +7,5 @@ spec:
   selector:
     app: chatservices
   ports:
-    - port: 3003
-      targetPort: 3003
+    - port: 4500
+      targetPort: 4500

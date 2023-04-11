@@ -7,5 +7,5 @@ spec:
   selector:
     app: userservices
   ports:
-    - port: 3002
-      targetPort: 3002
+    - port: 5500
+      targetPort: 5500

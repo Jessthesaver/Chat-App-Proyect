@@ -21,12 +21,12 @@ spec:
             - name: PORT
               value: "3500"
             - name: API_AUTH
-              value: http://authservices-svc:3001
+              value: http://authservices-svc:5000
             - name: API_USERS
-              value: http://usersservices-svc:3002
+              value: http://usersservices-svc:5500
             - name: API_CHAT
-              value: http://chatservices-svc:3003
+              value: http://chatservices-svc:4500
           resources:
             limits:
-              memory: "128Mi"
+              memory: "256Mi"
               cpu: "500m"

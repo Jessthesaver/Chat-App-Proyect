@@ -26,8 +26,8 @@ spec:
             - name: MONGO_URL
               value: mongodb://authservices-db-svc:27017/
             - name: PORT
-              value: "3001"
+              value: "5000"
           resources:
             limits:
-              memory: "128Mi"
+              memory: "256Mi"
               cpu: "500m"
