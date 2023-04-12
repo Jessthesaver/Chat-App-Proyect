@@ -1,0 +1,4 @@
+nginx-selfsigned.crt
+nginx-selfsigned.key
+configmaps/ssl-crt-configmap.yml
+secrets/ssl-key-secret.yml
