@@ -6,7 +6,7 @@ COPY package*.json ./
 
 RUN npm install
 
-ENV NODE_ENV=production
+#ENV NODE_ENV=production
 
 COPY . .
 

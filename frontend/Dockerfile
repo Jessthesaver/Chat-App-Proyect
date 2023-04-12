@@ -10,10 +10,12 @@ COPY . .
 
 RUN npm run build
 
-FROM nginx:1.23.2
+FROM nginx:latest
 
-COPY --from=base /user/src/app/build /usr/share/nginx/html
+COPY --from=base /user/src/app/build /user/share/nginx/html
 
-EXPOSE 3000
+COPY --from=base /user/src/app/build /etc/nginx/html
+
+#EXPOSE 3000
 
 CMD ["nginx", "-g", "daemon off;"]

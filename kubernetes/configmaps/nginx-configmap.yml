@@ -6,7 +6,7 @@ data:
   default.conf: |
     server {
       listen 80;
-      root /usr/share/nginx/html;
+      #root /user/share/nginx/html;
     }
 
     server {
