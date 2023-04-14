@@ -162,14 +162,30 @@ const resolvers = {
       });
       const svg = userInput.avatar.toDataUriSync();
 
+      const isValidPassword = validate.isStrongPassword(password, {
+        minLength: 8,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1,
+        returnScore: true,
+        pointsPerUnique: 1,
+        pointsPerRepeat: 0.5,
+        pointsForContainingLower: 10,
+        pointsForContainingUpper: 10,
+        pointsForContainingNumber: 10,
+        pointsForContainingSymbol: 10,
+      });
+
       if (
+        isValidPassword < 50 ||
         password !== confirmPassword ||
         !isValidEmail ||
-        username.length > 25 ||
-        name.length > 25 ||
-        email.length > 80 ||
-        password.length > 80 ||
-        confirmPassword.length > 80
+        username.trim().length > 25 ||
+        name.trim().length > 25 ||
+        email.trim().length > 80 ||
+        password.trim().length > 80 ||
+        confirmPassword.trim().length > 80
       ) {
         throw new GraphQLError("Internal Error", {
           extensions: {

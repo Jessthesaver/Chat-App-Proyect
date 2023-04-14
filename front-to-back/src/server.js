@@ -11,7 +11,7 @@ import cookieParser from "cookie-parser";
 import {} from "dotenv/config";
 
 import typeDefs from "./schema.js";
-import resolvers from "./resolvers.js";
+import resolvers from "./resolvers/resolvers.js";
 
 import AuthAPI from "./datasources/authAPI.js";
 import UserAPI from "./datasources/usersAPI.js";
