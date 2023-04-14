@@ -1,7 +1,5 @@
 import { withFilter } from "graphql-subscriptions";
-import { PubSub } from "graphql-subscriptions";
-
-const pubSub = new PubSub();
+import pubSub from "./pubsub";
 
 const subscriptions = {
   newMessage: {

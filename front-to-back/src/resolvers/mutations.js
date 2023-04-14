@@ -1,10 +1,10 @@
 import { GraphQLError } from "graphql";
-import { PubSub } from "graphql-subscriptions";
+
 import { createAvatar } from "@dicebear/core";
 import { adventurer } from "@dicebear/collection";
 import validate from "validator";
 
-const pubSub = new PubSub();
+import pubSub from "./pubsub";
 
 const mutations = {
   createUser: async (parent, { userInput }, { dataSources }) => {
@@ -378,7 +378,6 @@ const mutations = {
     });
 
     pubSub.publish(`GROUP_CHANGED`, {
-      // groupChanged: remainMembers,
       groupChanged: updatedRoom,
     });
 
@@ -576,8 +575,7 @@ const mutations = {
       const { updatedUserA, updatedUserB } =
         await dataSources.userAPI.deleteFriend({ userA, userB });
 
-      //Erase rooms
-      //From main user
+      //Erase rooms from main user
       const updatedRooms = updatedUserA.rooms.filter(
         (room) => room._id !== deletedRoom._id
       );
@@ -705,7 +703,6 @@ const mutations = {
       const newAdmins = await Promise.all(response);
 
       pubSub.publish(`GROUP_CHANGED`, {
-        // groupChanged: newAdmins,
         groupChanged: updatedRoom,
       });
 
