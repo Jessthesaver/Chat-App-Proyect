@@ -1,25 +1,62 @@
+import { withFilter } from "graphql-subscriptions";
 import { PubSub } from "graphql-subscriptions";
 
 const pubSub = new PubSub();
 
 const subscriptions = {
   newMessage: {
-    subscribe: () => pubSub.asyncIterator("MESSAGE_CREATED"),
+    subscribe: withFilter(
+      () => pubSub.asyncIterator(["MESSAGE_CREATED"]),
+      async ({ newMessage }, _, { dataSources, authUser }) => {
+        const room = await dataSources.chatAPI.getRoom(newMessage.roomId);
+        const exists = room.members.some(
+          (member) => member.username === authUser.username
+        );
+        return exists;
+      }
+    ),
   },
   newRoom: {
     subscribe: () => pubSub.asyncIterator("ROOM_CREATED"),
   },
   addFriend: {
-    subscribe: () => pubSub.asyncIterator("FRIEND_REQUEST"),
+    subscribe: withFilter(
+      () => pubSub.asyncIterator(["FRIEND_REQUEST"]),
+      ({ addFriend }, _, { authUser }) => {
+        const { to } = addFriend;
+        const exists = to.username === authUser.username;
+        return exists;
+      }
+    ),
   },
   friendRequestAccepted: {
-    subscribe: () => pubSub.asyncIterator(`FRIEND_REQUEST_ACCEPTED`),
+    subscribe: withFilter(
+      () => pubSub.asyncIterator(["FRIEND_REQUEST_ACCEPTED"]),
+      ({ friendRequestAccepted }, _, { authUser }) => {
+        const exists = friendRequestAccepted.username === authUser.username;
+        return exists;
+      }
+    ),
   },
   deleteContact: {
-    subscribe: () => pubSub.asyncIterator(`CONTACT_DELETED`),
+    subscribe: withFilter(
+      () => pubSub.asyncIterator([`CONTACT_DELETED`]),
+      ({ deleteContact }, _, { authUser }) => {
+        const exists = deleteContact.username === authUser.username;
+        return exists;
+      }
+    ),
   },
   groupChanged: {
-    subscribe: () => pubSub.asyncIterator(`GROUP_CHANGED`),
+    subscribe: withFilter(
+      () => pubSub.asyncIterator(`GROUP_CHANGED`),
+      ({ groupChanged }, _, { authUser }) => {
+        const exists = groupChanged.members.some(
+          (member) => member.username === authUser.username
+        );
+        return exists;
+      }
+    ),
   },
 };
 
