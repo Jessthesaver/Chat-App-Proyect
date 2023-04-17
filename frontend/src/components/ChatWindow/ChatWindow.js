@@ -1,22 +1,11 @@
 import { Grid } from "@mui/material";
 import ComposeArea from "./ComposeArea";
 import Messages from "./Messages";
-import { gql, useSubscription } from "@apollo/client";
+import { useSubscription } from "@apollo/client";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-
-const MESSAGES_SUBSCRIPTION = gql`
-  subscription newMessage($chatId: ID) {
-    newMessage(chatId: $chatId) {
-      content
-      isScribble
-      chatId
-      sendBy
-      createdAt
-    }
-  }
-`;
+import MESSAGES_SUBSCRIPTION from "../../graphql/subscriptions/messagesgql.js";
 
 const ChatWindow = () => {
   const { chatId } = useParams();

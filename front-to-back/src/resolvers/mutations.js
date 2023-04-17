@@ -4,7 +4,7 @@ import { createAvatar } from "@dicebear/core";
 import { adventurer } from "@dicebear/collection";
 import validate from "validator";
 
-import pubSub from "./pubsub";
+import pubSub from "./pubsub.js";
 
 const mutations = {
   createUser: async (parent, { userInput }, { dataSources }) => {
@@ -63,11 +63,7 @@ const mutations = {
 
       return { success: true, errorMessage: null };
     } catch (err) {
-      if (err.extensions.response.body.error.keyValue.email) {
-        throw new GraphQLError("The email has been used");
-      } else if (err.extensions.response.body.error.keyValue.username) {
-        throw new GraphQLError("The username has been taked");
-      }
+      throw new GraphQLError(err.extensions.response.body.error);
     }
   },
   login: async (parent, { userInput }, { dataSources, req, res }) => {

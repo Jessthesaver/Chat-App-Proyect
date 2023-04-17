@@ -28,45 +28,10 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Outlet, useParams } from "react-router-dom";
 import { gql, useSubscription } from "@apollo/client";
+import FRIEND_REQUEST from "../../graphql/subscriptions/friendRequestgql.js";
+import GROUP_CHANGED from "../../graphql/subscriptions/groupChangeGql.js";
 
 const drawerWidth = 275;
-
-const FRIEND_REQUEST = gql`
-  subscription FriendSub {
-    addFriend {
-      from {
-        username
-        name
-        avatar
-      }
-      to {
-        username
-        name
-        avatar
-      }
-    }
-  }
-`;
-
-const GROUP_CHANGED = gql`
-  subscription groupChanged {
-    groupChanged {
-      _id
-      name
-      groupalChat
-      admin {
-        username
-      }
-      isDeleted
-      members {
-        username
-        avatar
-        joinedAt
-      }
-    }
-  }
-`;
-
 function ResponsiveDrawer(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);

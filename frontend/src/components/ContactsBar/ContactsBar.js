@@ -4,57 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import TabHeader from "./TabHeader";
 import TabContent from "./TabContent";
 import { useTranslation } from "react-i18next";
-import { gql, useSubscription } from "@apollo/client";
-
-const FRIEND_REQUEST_ACCEPTED = gql`
-  subscription friendRequestAccepted {
-    friendRequestAccepted {
-      username
-      name
-      email
-      avatar
-      friendsList {
-        username
-        name
-        email
-        avatar
-      }
-      requests {
-        from {
-          username
-          name
-          email
-          avatar
-        }
-        to {
-          username
-          name
-          email
-          avatar
-        }
-      }
-      rooms {
-        _id
-        name
-        groupalChat
-        admin {
-          username
-        }
-        members {
-          username
-          name
-          email
-          joinedAt
-          avatar
-        }
-      }
-      token
-      settings {
-        language
-      }
-    }
-  }
-`;
+import { useSubscription } from "@apollo/client";
+import { FRIEND_REQUEST_ACCEPTED } from "../../graphql/subscriptions/requestAccepted.js";
 
 const ContactsBar = () => {
   const { t } = useTranslation();
