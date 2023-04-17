@@ -27,7 +27,7 @@ import Image from "./consts/avatar";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Outlet, useParams } from "react-router-dom";
-import { gql, useSubscription } from "@apollo/client";
+import { useSubscription } from "@apollo/client";
 import FRIEND_REQUEST from "../../graphql/subscriptions/friendRequestgql.js";
 import GROUP_CHANGED from "../../graphql/subscriptions/groupChangeGql.js";
 
