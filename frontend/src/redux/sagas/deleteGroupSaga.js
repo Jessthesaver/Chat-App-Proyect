@@ -3,49 +3,18 @@ import { call, put } from "redux-saga/effects";
 import client from "../../client";
 import { setDefaultNotification } from "../reducers/notificationSlice";
 import { setUser } from "../reducers/userSlice";
+import { USER_FIELDS } from "../../graphql/userFragmentGql";
 
 function* deleteGroup(action) {
   const options = {
     mutation: gql`
+      ${USER_FIELDS}
       mutation DeleteRoom($roomInput: RoomInput) {
         deleteRoom(roomInput: $roomInput) {
           success
           errorMessage
           value {
-            username
-            name
-            avatar
-            friendsList {
-              username
-              name
-              email
-              avatar
-            }
-            rooms {
-              _id
-              name
-              groupalChat
-              admin {
-                username
-              }
-              members {
-                username
-                name
-                avatar
-              }
-            }
-            requests {
-              from {
-                username
-                name
-                avatar
-              }
-              to {
-                username
-                name
-                avatar
-              }
-            }
+            ...UserFields
           }
         }
       }

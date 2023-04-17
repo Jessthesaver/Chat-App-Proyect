@@ -7,52 +7,16 @@ import {
 } from "../reducers/notificationSlice";
 import { setUser } from "../reducers/userSlice";
 import { t } from "i18next";
+import { USER_FIELDS } from "../../graphql/userFragmentGql";
 
 function* setLanguage(action) {
   const options = {
     mutation: gql`
+      ${USER_FIELDS}
       mutation ChangeLanguage($settingsInput: SettingsInput) {
         changeLanguage(settingsInput: $settingsInput) {
           value {
-            username
-            name
-            email
-            avatar
-            settings {
-              language
-            }
-            friendsList {
-              username
-              name
-              email
-              avatar
-            }
-            requests {
-              from {
-                username
-                name
-                avatar
-              }
-              to {
-                username
-                name
-                avatar
-              }
-            }
-            rooms {
-              _id
-              name
-              groupalChat
-              admin {
-                username
-              }
-              members {
-                username
-                name
-                avatar
-                joinedAt
-              }
-            }
+            ...UserFields
             token
           }
         }

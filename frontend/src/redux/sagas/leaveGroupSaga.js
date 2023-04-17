@@ -3,55 +3,25 @@ import { call, put } from "redux-saga/effects";
 import client from "../../client";
 import { setDefaultNotification } from "../reducers/notificationSlice";
 import { setUser } from "../reducers/userSlice";
+import { USER_FIELDS } from "../../graphql/userFragmentGql";
 
 function* leaveGroup(action) {
   const options = {
     mutation: gql`
-        mutation LeaveGroup($roomInput: RoomInput) {
-            leaveGroup(roomInput: $roomInput) {
-              success
-              errorMessage
-              value {  
-              username
-              name
-              avatar
-              friendsList {
-                username
-                name
-                email
-                avatar
-              }
-              rooms {
-                _id
-                name
-                groupalChat
-                admin {
-                  username
-                }
-                members {
-                  username
-                  avatar
-                }
-              }
-              requests {
-                from {
-                  username
-                  name
-                  avatar
-                }
-                to{
-                  username
-                  name
-                  avatar
-                }
-              }
-              token
-              }
-            }
+      ${USER_FIELDS}
+      mutation LeaveGroup($roomInput: RoomInput) {
+        leaveGroup(roomInput: $roomInput) {
+          success
+          errorMessage
+          value {
+            ...UserFields
+            token
           }
-        `,
+        }
+      }
+    `,
     variables: action.payload,
-  }
+  };
   try {
     const res = yield call(client.mutate, options);
     const { value } = res.data.leaveGroup;
@@ -60,6 +30,6 @@ function* leaveGroup(action) {
   } catch (error) {
     yield put(setDefaultNotification());
   }
-};
+}
 
 export default leaveGroup;

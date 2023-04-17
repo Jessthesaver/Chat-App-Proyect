@@ -2,22 +2,15 @@ import { gql } from "@apollo/client";
 import { call, put } from "redux-saga/effects";
 import client from "../../client";
 import { setGroupRoom } from "../reducers/userSlice";
+import { ROOM_FIELDS } from "../../graphql/groupFragmentGql";
 
 function* createGroup(action) {
   const options = {
     mutation: gql`
+      ${ROOM_FIELDS}
       mutation createChatRoom($roomInput: RoomInput) {
         createChatRoom(roomInput: $roomInput) {
-          _id
-          name
-          groupalChat
-          admin {
-            username
-          }
-          members {
-            username
-            joinedAt
-          }
+          ...RoomFields
         }
       }
     `,

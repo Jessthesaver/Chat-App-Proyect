@@ -2,27 +2,18 @@ import { gql } from "@apollo/client";
 import { call, put } from "redux-saga/effects";
 import client from "../../client";
 import { userErrorFetching, newMember } from "../reducers/userSlice";
+import { ROOM_FIELDS } from "../../graphql/groupFragmentGql";
 
 function* addMember(action) {
   const options = {
     mutation: gql`
-        mutation addMember($roomInput: RoomInput) {
-            addMember(roomInput: $roomInput) {
-              _id
-              name
-              groupalChat
-              admin {
-                username
-              }
-              members {
-                _id
-                username
-                avatar
-                joinedAt
-              }
-            }
-          }
-        `,
+      ${ROOM_FIELDS}
+      mutation addMember($roomInput: RoomInput) {
+        addMember(roomInput: $roomInput) {
+          ...RoomFields
+        }
+      }
+    `,
     variables: action.payload,
     fetchPolicy: "no-cache",
   };
@@ -34,6 +25,6 @@ function* addMember(action) {
   } catch (error) {
     yield put(userErrorFetching(error));
   }
-};
+}
 
 export default addMember;

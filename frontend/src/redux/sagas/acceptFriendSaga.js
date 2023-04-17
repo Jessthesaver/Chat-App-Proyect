@@ -2,61 +2,24 @@ import { gql } from "@apollo/client";
 import { call, put } from "redux-saga/effects";
 import client from "../../client";
 import { acceptFriend, userErrorFetching } from "../reducers/userSlice";
-
+import { USER_FIELDS } from "../../graphql/userFragmentGql.js";
 function* acceptContact(action) {
   const options = {
     mutation: gql`
-    mutation AcceptFriend($friendInput: FriendInput) {
-      acceptFriend(friendInput: $friendInput) {
-        success
-        errorMessage
-        value {
-          username
-          name
-          email
-          settings {
-            language
-          }
-          requests {
-            from {
-              username
-              name
-              avatar
-            }
-            to{
-              username
-              name
-              avatar
-            }
-          }
-          avatar
-          friendsList {
-            username
-            avatar
-            name
-            email
-          }
-          rooms {
-            _id
-            name
-            admin {
-              username
-            }
-            groupalChat
-            members {
-              username
-              name
-              avatar
-              joinedAt
-            }
+      ${USER_FIELDS}
+      mutation AcceptFriend($friendInput: FriendInput) {
+        acceptFriend(friendInput: $friendInput) {
+          success
+          errorMessage
+          value {
+            ...UserFields
           }
         }
       }
-    }
-        `,
+    `,
     variables: action.payload,
-    fetchPolicy: "network-only"
-  }
+    fetchPolicy: "network-only",
+  };
   try {
     const res = yield call(client.mutate, options);
     const { value } = res.data.acceptFriend;
@@ -65,6 +28,6 @@ function* acceptContact(action) {
   } catch (error) {
     yield put(userErrorFetching(error));
   }
-};
+}
 
 export default acceptContact;

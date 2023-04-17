@@ -3,29 +3,19 @@ import { call, put } from "redux-saga/effects";
 import client from "../../client";
 import { setDefaultNotification } from "../reducers/notificationSlice";
 import { removeMember } from "../reducers/userSlice";
+import { ROOM_FIELDS } from "../../graphql/groupFragmentGql";
 
 function* deleteMember(action) {
   const options = {
     mutation: gql`
-        mutation deleteMember($roomInput: RoomInput) {
-            deleteMember(roomInput: $roomInput) {
-              _id
-              name
-              admin {
-                username
-              }
-              groupalChat
-              members {
-                username
-                name
-                avatar
-                joinedAt
-              }
-            }
-          }
-        `,
+      ${ROOM_FIELDS}
+      mutation deleteMember($roomInput: RoomInput) {
+        deleteMember(roomInput: $roomInput) {
+          ...RoomFields
+        }
+      }
+    `,
     variables: action.payload,
-    // fetchPolicy: "no-cache",
   };
 
   try {
@@ -35,6 +25,6 @@ function* deleteMember(action) {
   } catch (error) {
     yield put(setDefaultNotification());
   }
-};
+}
 
 export default deleteMember;

@@ -1,65 +1,24 @@
 import { put, call } from "redux-saga/effects";
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 import client from "../../client";
 import { deleteContact } from "../reducers/userSlice";
 import { setDefaultNotification } from "../reducers/notificationSlice";
+import { USER_FIELDS } from "../../graphql/userFragmentGql";
 
 function* deleteFriend(action) {
   const options = {
     mutation: gql`
-    mutation DeleteFriend($friendInput: FriendInput) {
-      deleteFriend(friendInput: $friendInput) {
-        success
-        errorMessage
-        value {
-          username
-          friendsList {
-            username
-            email
-            name
-            avatar
-          }
-          avatar
-          email
-          name
-          rooms {
-            _id
-            name
-            groupalChat
-            admin {
-              username
-            }
-            members {
-              username
-              name
-              email
-              joinedAt
-              avatar
-            }
-          }
-          _id
-          token
-          requests {
-            to {
-              username
-              name
-              email
-              avatar
-            }
-            from {
-              username
-              name
-              email
-              avatar
-            }
-          }
-          settings {
-            language
+      ${USER_FIELDS}
+      mutation DeleteFriend($friendInput: FriendInput) {
+        deleteFriend(friendInput: $friendInput) {
+          success
+          errorMessage
+          value {
+            ...UserFields
           }
         }
       }
-    }
-        `,
+    `,
     variables: action.payload,
     fetchPolicy: "no-cache",
   };
@@ -71,6 +30,6 @@ function* deleteFriend(action) {
   } catch (error) {
     yield put(setDefaultNotification());
   }
-};
+}
 
 export default deleteFriend;

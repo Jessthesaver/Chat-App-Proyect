@@ -4,50 +4,15 @@ import client from "../../client";
 import { setUser } from "../reducers/userSlice";
 import { setNotification } from "../reducers/notificationSlice";
 import { t } from "i18next";
+import { USER_FIELDS } from "../../graphql/userFragmentGql";
 
 function* login(action) {
   const options = {
     mutation: gql`
+      ${USER_FIELDS}
       mutation Login($userInput: UserInput) {
         login(userInput: $userInput) {
-          username
-          name
-          email
-          avatar
-          friendsList {
-            username
-            name
-            email
-            avatar
-          }
-          requests {
-            from {
-              username
-              name
-              avatar
-            }
-            to {
-              username
-              name
-              avatar
-            }
-          }
-          rooms {
-            _id
-            name
-            groupalChat
-            admin {
-              username
-            }
-            members {
-              username
-              avatar
-              joinedAt
-            }
-          }
-          settings {
-            language
-          }
+          ...UserFields
           token
         }
       }

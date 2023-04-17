@@ -11,7 +11,7 @@ function* newMessage(action) {
         createMessage(messageInput: $messageInput) {
           _id
           chatId
-          #sendBy
+          sendBy
           content
           isScribble
         }
