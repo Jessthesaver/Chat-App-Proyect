@@ -1,47 +1,11 @@
 import { gql } from "@apollo/client";
+import { USER_FIELDS } from "../userFragmentGql.js";
 
 const CONTACT_DELETED = gql`
+  ${USER_FIELDS}
   subscription deleteContact {
     deleteContact {
-      username
-      name
-      email
-      avatar
-      friendsList {
-        username
-        name
-        email
-        avatar
-      }
-      requests {
-        from {
-          username
-          name
-          email
-          avatar
-        }
-        to {
-          username
-          name
-          email
-          avatar
-        }
-      }
-      rooms {
-        _id
-        name
-        groupalChat
-        admin {
-          username
-        }
-        members {
-          username
-          name
-          email
-          joinedAt
-          avatar
-        }
-      }
+      ...UserFields
       token
       settings {
         language

@@ -5,7 +5,7 @@ import TabHeader from "./TabHeader";
 import TabContent from "./TabContent";
 import { useTranslation } from "react-i18next";
 import { useSubscription } from "@apollo/client";
-import { FRIEND_REQUEST_ACCEPTED } from "../../graphql/subscriptions/requestAccepted.js";
+import { FRIEND_REQUEST_ACCEPTED } from "../../graphql/subscriptions/requestAccepted";
 
 const ContactsBar = () => {
   const { t } = useTranslation();

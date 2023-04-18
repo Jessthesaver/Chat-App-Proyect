@@ -1,47 +1,11 @@
 import { gql } from "@apollo/client";
+import { USER_FIELDS } from "../userFragmentGql.js";
 
-const FRIEND_REQUEST_ACCEPTED = gql`
+export const FRIEND_REQUEST_ACCEPTED = gql`
+  ${USER_FIELDS}
   subscription friendRequestAccepted {
     friendRequestAccepted {
-      username
-      name
-      email
-      avatar
-      friendsList {
-        username
-        name
-        email
-        avatar
-      }
-      requests {
-        from {
-          username
-          name
-          email
-          avatar
-        }
-        to {
-          username
-          name
-          email
-          avatar
-        }
-      }
-      rooms {
-        _id
-        name
-        groupalChat
-        admin {
-          username
-        }
-        members {
-          username
-          name
-          email
-          joinedAt
-          avatar
-        }
-      }
+      ...UserFields
       token
       settings {
         language
@@ -49,5 +13,3 @@ const FRIEND_REQUEST_ACCEPTED = gql`
     }
   }
 `;
-
-export default FRIEND_REQUEST_ACCEPTED;

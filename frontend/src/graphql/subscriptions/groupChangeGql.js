@@ -1,20 +1,11 @@
 import { gql } from "@apollo/client";
+import { ROOM_FIELDS } from "../groupFragmentGql.js";
 
 const GROUP_CHANGED = gql`
+  ${ROOM_FIELDS}
   subscription groupChanged {
     groupChanged {
-      _id
-      name
-      groupalChat
-      admin {
-        username
-      }
-      isDeleted
-      members {
-        username
-        avatar
-        joinedAt
-      }
+      ...RoomFields
     }
   }
 `;
