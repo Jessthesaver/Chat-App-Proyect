@@ -37,5 +37,5 @@ spec:
               name: nginx-configmap-ssl-key-volume
           resources:
             limits:
-              memory: "128Mi"
+              memory: "512Mi"
               cpu: "500m"
