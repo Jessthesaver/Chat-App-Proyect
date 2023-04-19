@@ -93,7 +93,9 @@ const MessageItem = ({ message }) => {
               />
               <ListItemIcon
                 sx={{
-                  borderRadius: "5px",
+                  width: "450px",
+                  height: "300px",
+                  borderRadius: "3px",
                   backgroundColor: "whitesmoke",
                 }}>
                 <img alt="" src={message.content} />
