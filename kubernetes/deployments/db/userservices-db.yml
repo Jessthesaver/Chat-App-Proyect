@@ -24,9 +24,9 @@ spec:
           volumeMounts:
             - mountPath: /data/db
               name: userservices-volume
-          resources:
-            limits:
-              memory: "512Mi"
-              cpu: "500m"
+          #resources:
+          #limits:
+          #memory: "512Mi"
+          #cpu: "500m"
           ports:
             - containerPort: 27017

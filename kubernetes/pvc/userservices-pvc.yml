@@ -5,10 +5,9 @@ metadata:
   labels:
     app: userservices-db
 spec:
-  storageClassName: db-storage-class
+  #storageClassName: db-storage-class
   resources:
     requests:
       storage: 512Mi
-  volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
