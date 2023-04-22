@@ -2,17 +2,17 @@ import { gql } from "@apollo/client";
 import { call, put } from "redux-saga/effects";
 import client from "../../client";
 import { acceptFriend, userErrorFetching } from "../reducers/userSlice";
-import { USER_FIELDS } from "../../graphql/userFragmentGql.js";
+import { CORE_USER_FIELDS } from "../../graphql/userFragmentGql.js";
 function* acceptContact(action) {
   const options = {
     mutation: gql`
-      ${USER_FIELDS}
+      ${CORE_USER_FIELDS}
       mutation AcceptFriend($friendInput: FriendInput) {
         acceptFriend(friendInput: $friendInput) {
           success
           errorMessage
           value {
-            ...UserFields
+            ...CoreUserFields
           }
         }
       }

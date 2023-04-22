@@ -1,11 +1,11 @@
 import { gql } from "@apollo/client";
-import { ROOM_FIELDS } from "../groupFragmentGql.js";
+import { CORE_ROOM_FIELDS } from "../groupFragmentGql.js";
 
 const GROUP_CHANGED = gql`
-  ${ROOM_FIELDS}
+  ${CORE_ROOM_FIELDS}
   subscription groupChanged {
     groupChanged {
-      ...RoomFields
+      ...CoreRoomFields
     }
   }
 `;

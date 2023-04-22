@@ -1,45 +1,57 @@
 import { gql } from "@apollo/client";
 
-export const USER_FIELDS = gql`
-  fragment UserFields on User {
-    username
-    name
+export const CORE_USER_FIELDS = gql`
+  fragment CoreUserFields on User {
+    _id
     email
-    settings {
-      language
-    }
-    requests {
-      from {
-        username
-        mame
-        avatar
-      }
-      to {
-        username
-        name
-        avatar
-      }
-    }
     avatar
     friendsList {
-      username
       avatar
-      name
       email
+      joinedAt
+      name
+      username
     }
+    name
     rooms {
       _id
-      name
       admin {
+        joinedAt
+        avatar
+        email
+        name
         username
       }
       groupalChat
+      isDeleted
       members {
-        username
-        name
+        email
         avatar
         joinedAt
+        name
+        username
+      }
+      name
+    }
+    requests {
+      from {
+        avatar
+        email
+        joinedAt
+        name
+        username
+      }
+      to {
+        avatar
+        email
+        joinedAt
+        name
+        username
       }
     }
+    settings {
+      language
+    }
+    username
   }
 `;

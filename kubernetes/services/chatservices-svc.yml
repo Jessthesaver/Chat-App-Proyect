@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: chatservices-svc
+  name: chat-service-svc
 spec:
   type: ClusterIP
   selector:
-    app: chatservices
+    app: chat-service
   ports:
     - port: 4500
       targetPort: 4500

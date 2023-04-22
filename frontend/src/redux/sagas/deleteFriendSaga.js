@@ -3,18 +3,18 @@ import { gql } from "@apollo/client";
 import client from "../../client";
 import { deleteContact } from "../reducers/userSlice";
 import { setDefaultNotification } from "../reducers/notificationSlice";
-import { USER_FIELDS } from "../../graphql/userFragmentGql";
+import { CORE_USER_FIELDS } from "../../graphql/userFragmentGql.js";
 
 function* deleteFriend(action) {
   const options = {
     mutation: gql`
-      ${USER_FIELDS}
+      ${CORE_USER_FIELDS}
       mutation DeleteFriend($friendInput: FriendInput) {
         deleteFriend(friendInput: $friendInput) {
           success
           errorMessage
           value {
-            ...UserFields
+            ...CoreUserFields
           }
         }
       }

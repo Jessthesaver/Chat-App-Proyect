@@ -9,12 +9,12 @@ const app = express();
 
 const port = process.env.PORT || 3002;
 
-app.use(
-  expressWinston.logger({
-    winstonInstance: logger,
-    statusLevels: true,
-  })
-);
+// app.use(
+//   expressWinston.logger({
+//     winstonInstance: logger,
+//     statusLevels: true,
+//   })
+// );
 
 app.use(express.json());
 

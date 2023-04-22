@@ -1,28 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: chatservices-deployment
+  name: chat-service-deployment
   labels:
-    app: chatservices
+    app: chat-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: chatservices
+      app: chat-service
   template:
     metadata:
       labels:
-        app: chatservices
+        app: chat-service
     spec:
       containers:
-        - name: chatservices
+        - name: chat-service
           image: jessthesaver/chatservices
+          #command: ["tail", "-f", "/dev/null"]
           env:
             - name: MONGO_URL
-              value: mongodb://chatservices-db-svc:27017/
+              value: mongodb://chat-db-svc:27017/
             - name: PORT
               value: "4500"
           resources:
             limits:
-              memory: "256Mi"
+              memory: "512Mi"
               cpu: "500m"

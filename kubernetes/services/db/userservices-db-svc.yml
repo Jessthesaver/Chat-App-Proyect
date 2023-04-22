@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: userservices-db-svc
+  name: users-db-svc
 spec:
   selector:
-    app: userservices-db
+    app: users-service-db
   type: NodePort
   ports:
     - port: 27017

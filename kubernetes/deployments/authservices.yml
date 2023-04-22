@@ -1,33 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: authservices-deployment
+  name: auth-service-deployment
   labels:
-    app: authservices
+    app: auth-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: authservices
+      app: auth-service
   template:
     metadata:
       labels:
-        app: authservices
+        app: auth-service
     spec:
       containers:
-        - name: authservices
+        - name: auth-service
           image: jessthesaver/authservices
+          #command: ["tail", "-f", "/dev/null"]
           env:
-            - name: SECRET_TOKEN
+            - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: jwt-secret
                   key: token
             - name: MONGO_URL
-              value: mongodb://authservices-db-svc:27017/
+              value: mongodb://auth-db-svc:27017/
             - name: PORT
               value: "5000"
           resources:
             limits:
-              memory: "256Mi"
+              memory: "512Mi"
               cpu: "500m"

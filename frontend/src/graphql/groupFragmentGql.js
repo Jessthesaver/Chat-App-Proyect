@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
-export const ROOM_FIELDS = gql`
-  fragment RoomFields on Room {
+export const CORE_ROOM_FIELDS = gql`
+  fragment CoreRoomFields on Room {
     _id
     name
     admin {

@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: authservices-db-svc
+  name: auth-db-svc
 spec:
   selector:
-    app: authservices-db
+    app: auth-service-db
   type: NodePort
   ports:
     - port: 27017

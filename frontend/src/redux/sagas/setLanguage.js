@@ -7,16 +7,16 @@ import {
 } from "../reducers/notificationSlice";
 import { setUser } from "../reducers/userSlice";
 import { t } from "i18next";
-import { USER_FIELDS } from "../../graphql/userFragmentGql";
+import { CORE_USER_FIELDS } from "../../graphql/userFragmentGql";
 
 function* setLanguage(action) {
   const options = {
     mutation: gql`
-      ${USER_FIELDS}
+      ${CORE_USER_FIELDS}
       mutation ChangeLanguage($settingsInput: SettingsInput) {
         changeLanguage(settingsInput: $settingsInput) {
           value {
-            ...UserFields
+            ...CoreUserFields
             token
           }
         }

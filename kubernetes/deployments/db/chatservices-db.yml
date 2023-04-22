@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: chatservices-db-deployment
+  name: chat-service-db-deployment
   labels:
-    app: chatservices-db
+    app: chat-service-db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: chatservices-db
+      app: chat-service-db
   template:
     metadata:
       labels:
-        app: chatservices-db
+        app: chat-service-db
     spec:
       volumes:
-        - name: chatservices-volume
+        - name: chat-volume
           persistentVolumeClaim:
-            claimName: chatservices-pvc
+            claimName: chat-service-pvc
       containers:
         - name: mongo
           image: mongo
           volumeMounts:
             - mountPath: /data/db
-              name: chatservices-volume
-          #resources:
-          #limits:
-          #memory: "512Mi"
-          #cpu: "500m"
+              name: chat-volume
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
           ports:
             - containerPort: 27017

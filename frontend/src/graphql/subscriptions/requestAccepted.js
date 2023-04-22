@@ -1,11 +1,11 @@
 import { gql } from "@apollo/client";
-import { USER_FIELDS } from "../userFragmentGql.js";
+import { CORE_USER_FIELDS } from "../userFragmentGql.js";
 
 export const FRIEND_REQUEST_ACCEPTED = gql`
-  ${USER_FIELDS}
+  ${CORE_USER_FIELDS}
   subscription friendRequestAccepted {
     friendRequestAccepted {
-      ...UserFields
+      ...CoreUserFields
       token
       settings {
         language

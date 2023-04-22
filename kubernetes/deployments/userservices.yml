@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: userservices-deployment
+  name: users-service-deployment
   labels:
-    app: userservices
+    app: users-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: userservices
+      app: users-service
   template:
     metadata:
       labels:
-        app: userservices
+        app: users-service
     spec:
       containers:
-        - name: userservices
+        - name: users-service
           image: jessthesaver/userservices
           env:
             - name: MONGO_URL
-              value: mongodb://userservices-db-svc:27017/
+              value: mongodb://users-db-svc:27017/
             - name: PORT
               value: "5500"
           resources:
             limits:
-              memory: "256Mi"
+              memory: "512Mi"
               cpu: "500m"

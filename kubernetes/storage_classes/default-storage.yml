@@ -3,4 +3,3 @@ kind: StorageClass
 metadata:
   name: db-storage-class
 provisioner: kubernetes.io/aws-ebs
-volumeBindingMode: WaitForFirstConsumer

@@ -3,15 +3,15 @@ import { call, put } from "redux-saga/effects";
 import client from "../../client";
 import { setDefaultNotification } from "../reducers/notificationSlice";
 import { removeMember } from "../reducers/userSlice";
-import { ROOM_FIELDS } from "../../graphql/groupFragmentGql";
+import { CORE_ROOM_FIELDS } from "../../graphql/groupFragmentGql";
 
 function* deleteMember(action) {
   const options = {
     mutation: gql`
-      ${ROOM_FIELDS}
+      ${CORE_ROOM_FIELDS}
       mutation deleteMember($roomInput: RoomInput) {
         deleteMember(roomInput: $roomInput) {
-          ...RoomFields
+          ...CoreRoomFields
         }
       }
     `,

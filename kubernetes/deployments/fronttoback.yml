@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fronttoback-deployment
+  name: gateway-deployment
   labels:
-    app: fronttoback
+    app: gateway
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fronttoback
+      app: gateway
   template:
     metadata:
       labels:
-        app: fronttoback
+        app: gateway
     spec:
       containers:
-        - name: fronttoback
+        - name: gateway
           image: jessthesaver/fronttoback
           env:
             - name: PORT
               value: "3500"
-            - name: API_AUTH
-              value: http://authservices-svc:5000
             - name: API_USERS
-              value: http://usersservices-svc:5500
+              value: http://users-service-svc:5500
+            - name: API_AUTH
+              value: http://auth-service-svc:5000
             - name: API_CHAT
-              value: http://chatservices-svc:4500
+              value: http://chat-service-svc:4500
           resources:
             limits:
-              memory: "256Mi"
+              memory: "512Mi"
               cpu: "500m"

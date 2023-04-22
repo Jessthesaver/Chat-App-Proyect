@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: authservices-db-deployment
+  name: auth-service-db-deployment
   labels:
-    app: authservices-db
+    app: auth-service-db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: authservices-db
+      app: auth-service-db
   template:
     metadata:
       labels:
-        app: authservices-db
+        app: auth-service-db
     spec:
       volumes:
-        - name: authservices-volume
+        - name: auth-volume
           persistentVolumeClaim:
-            claimName: authservices-pvc
+            claimName: auth-service-pvc
       containers:
         - name: mongo
           image: mongo
           volumeMounts:
             - mountPath: /data/db
-              name: authservices-volume
+              name: auth-volume
           resources:
             limits:
               memory: "512Mi"
-              #cpu: "500m"
+              cpu: "500m"
           ports:
             - containerPort: 27017

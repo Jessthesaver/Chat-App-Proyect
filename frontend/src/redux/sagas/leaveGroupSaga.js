@@ -3,18 +3,18 @@ import { call, put } from "redux-saga/effects";
 import client from "../../client";
 import { setDefaultNotification } from "../reducers/notificationSlice";
 import { setUser } from "../reducers/userSlice";
-import { USER_FIELDS } from "../../graphql/userFragmentGql";
+import { CORE_USER_FIELDS } from "../../graphql/userFragmentGql";
 
 function* leaveGroup(action) {
   const options = {
     mutation: gql`
-      ${USER_FIELDS}
+      ${CORE_USER_FIELDS}
       mutation LeaveGroup($roomInput: RoomInput) {
         leaveGroup(roomInput: $roomInput) {
           success
           errorMessage
           value {
-            ...UserFields
+            ...CoreUserFields
             token
           }
         }
