@@ -11,12 +11,12 @@ import {} from "dotenv/config";
 const app = express();
 
 app.use(express.json());
-// app.use(
-//   expressWinston.logger({
-//     winstonInstance: logger,
-//     statusLevels: true,
-//   })
-// );
+app.use(
+  expressWinston.logger({
+    winstonInstance: logger,
+    statusLevels: true,
+  })
+);
 
 const server = http.createServer(app);
 const port = process.env.PORT || 3001;

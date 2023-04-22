@@ -33,8 +33,6 @@ passport.use(
     },
     async (username, password, done) => {
       try {
-        //authenticationModel.collection.dropIndexes();
-
         const user = await authenticationModel.create({ username, password });
         done(null, user);
       } catch (err) {
