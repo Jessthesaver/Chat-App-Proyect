@@ -20,7 +20,7 @@ spec:
           #command: ["tail", "-f", "/dev/null"]
           env:
             - name: MONGO_URL
-              value: mongodb://chat-db-svc:27017/
+              value: mongodb://chat-db-svc:27017/chats
             - name: PORT
               value: "4500"
           resources:

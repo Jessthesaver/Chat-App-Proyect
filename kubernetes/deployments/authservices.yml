@@ -25,7 +25,7 @@ spec:
                   name: jwt-secret
                   key: token
             - name: MONGODB_URL
-              value: mongodb://auth-db-svc:27017/
+              value: mongodb://auth-db-svc:27017/auth
             - name: PORT
               value: "5000"
           resources:
