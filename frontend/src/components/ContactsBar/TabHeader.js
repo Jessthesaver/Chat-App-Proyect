@@ -84,14 +84,14 @@ const TabHeader = ({ open, setOpen, filterData }) => {
       sx={{
         display: "flex",
         alignItems: "center",
+        flexDirection: "column",
         padding: 0,
-        mr: 2,
         width: "100%",
-        height: "100px",
-        borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
+        height: "150px",
       }}>
-      <Box>
+      <Box m={1} sx={{ width: "100%" }}>
         <SearchBar
+          m={1}
           placeholder={t("searchFriend")}
           onChange={(event) => handleSearch(event.target.value)}
         />
@@ -100,7 +100,7 @@ const TabHeader = ({ open, setOpen, filterData }) => {
       <Box
         m={1}
         sx={{
-          width: "65px",
+          width: "95%",
         }}>
         <CommonButton
           variant="contained"

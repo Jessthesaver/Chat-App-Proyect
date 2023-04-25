@@ -77,6 +77,6 @@ export const navbarStyles = {
   },
   addUserButton: {
     fontSize: "0.65rem",
-    width: "60px",
+    width: 1,
   },
 };

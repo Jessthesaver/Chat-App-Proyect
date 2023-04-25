@@ -5,7 +5,6 @@ class AuthAPI extends RESTDataSource {
 
   constructor(options = {}) {
     super(options);
-    //this.memoizeGetRequests;
   }
 
   async signup(username, password) {

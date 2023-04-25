@@ -36,8 +36,6 @@ const FriendRequests = () => {
           container
           sx={{
             position: "relative",
-            // display: 'flex',
-            // flexDirection: 'column',
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
@@ -56,7 +54,6 @@ const FriendRequests = () => {
               justifyContent: "right",
               height: "auto",
               backgroundColor: "rgba(120, 120, 120, 1.0)",
-              // justifyItems: 'right',
             }}>
             <IconButton
               size="medium"

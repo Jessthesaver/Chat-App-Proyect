@@ -83,23 +83,19 @@ const ConvTabHeader = ({ open, setOpen, filterData }) => {
       sx={{
         display: "flex",
         alignItems: "center",
+        flexDirection: "column",
         padding: 0,
-        mr: 2,
         width: "100%",
-        height: "100px",
+        height: "150px",
       }}>
-      <Box>
+      <Box m={1} sx={{ width: "100%" }}>
         <SearchBar
+          width={1}
           placeholder={t("searchConversation")}
           onChange={(event) => handleSearch(event.target.value)}
         />
       </Box>
-
-      <Box
-        m={1}
-        sx={{
-          width: "65px",
-        }}>
+      <Box m={1} sx={{ width: "95%" }}>
         <CommonButton
           variant="contained"
           size="large"

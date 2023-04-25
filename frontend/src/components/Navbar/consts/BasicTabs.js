@@ -52,12 +52,6 @@ export default function BasicTabs() {
   const { t } = useTranslation();
   const [value, setValue] = React.useState(0);
 
-  // React.useEffect(() => {
-  //     setTimeout(() => {
-  //         setValue(0);
-  //     }, 0)
-  // }, []);
-
   const handleChange = (event, newValue) => {
     event.preventDefault();
     setValue(newValue);
@@ -69,11 +63,7 @@ export default function BasicTabs() {
           value={value}
           variant="fullWidth"
           onChange={handleChange}
-          aria-label="basic tabs example"
-          // sx={{
-          //     wordBreak: 'break-word'
-          // }}
-        >
+          aria-label="basic tabs example">
           <Tab label={t("contacts")} {...a11yProps(0)} />
           <Tab label={t("conversations")} {...a11yProps(1)} />
         </Tabs>

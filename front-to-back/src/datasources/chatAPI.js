@@ -46,10 +46,6 @@ class ChatAPI extends RESTDataSource {
   async deleteAdmin(_id, admin) {
     return this.patch(`api/chat/rooms/deleteAdmin/${_id}`, { body: admin });
   }
-
-  async deleteRoom(_id) {
-    return this.delete(`api/chat/rooms/deleteChatRoom/${_id}`);
-  }
 }
 
 export default ChatAPI;

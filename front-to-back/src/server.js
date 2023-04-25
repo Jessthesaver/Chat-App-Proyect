@@ -8,6 +8,7 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
 import { expressMiddleware } from "@apollo/server/express4";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import { parse } from "cookie-parse";
 import {} from "dotenv/config";
 
 import typeDefs from "./schema.js";
@@ -35,14 +36,37 @@ const server = async () => {
   const serverCleanup = useServer(
     {
       schema,
-      context: async () => {
+      context: async (ctx) => {
+        const cache = server;
+        const { JWT } = parse(ctx.extra.request.headers.cookie);
+
+        let authUser;
+
+        if (JWT) {
+          authUser = await new AuthAPI().secureRoute(JWT);
+          const { user } = authUser;
+
+          if (!user) {
+            throw new GraphQLError("Internal Error", {
+              extensions: {
+                code: "UNAUTHENTICATED",
+                http: { status: 401 },
+              },
+            });
+          }
+
+          const fromUserService = await new UserAPI().getUser(user);
+
+          authUser = { ...authUser.user, ...fromUserService.user };
+        }
         const dataSources = {
-          authAPI: new AuthAPI(),
-          userAPI: new UserAPI(),
-          chatAPI: new ChatAPI(),
+          authAPI: new AuthAPI({ cache }),
+          userAPI: new UserAPI({ cache }),
+          chatAPI: new ChatAPI({ cache }),
         };
         return {
           dataSources,
+          authUser,
         };
       },
     },
@@ -51,7 +75,7 @@ const server = async () => {
 
   const server = new ApolloServer({
     schema,
-    //introspection: process.env.NODE_ENV !== 'production',
+    introspection: process.env.NODE_ENV !== "production",
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
 

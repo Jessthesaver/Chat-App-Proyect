@@ -63,7 +63,13 @@ const mutations = {
 
       return { success: true, errorMessage: null };
     } catch (err) {
-      throw new GraphQLError(err.extensions.response.body.error);
+      if (err.extensions.response.body.error.includes("index: email_1")) {
+        throw new GraphQLError("The email has been used");
+      } else if (
+        err.extensions.response.body.error.includes("index: username_1")
+      ) {
+        throw new GraphQLError("The username has been taked");
+      }
     }
   },
   login: async (parent, { userInput }, { dataSources, req, res }) => {
@@ -649,7 +655,7 @@ const mutations = {
         return user;
       });
 
-      const newAdmins = await Promise.all(response);
+      await Promise.all(response);
 
       pubSub.publish(`GROUP_CHANGED`, {
         groupChanged: updatedRoom,

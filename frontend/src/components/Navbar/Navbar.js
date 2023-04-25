@@ -116,23 +116,11 @@ function ResponsiveDrawer(props) {
     <Grid
       container
       sx={{
+        flexDirection: "column",
         width: "100%",
         height: "100%",
       }}>
       <Grid container sx={navbarStyles.avatar}>
-        <Grid item xs={3}>
-          <Image />
-        </Grid>
-        <Grid item xs={7}>
-          <Typography
-            variant="h5"
-            component="div"
-            sx={{
-              width: "100%",
-            }}>
-            {username}
-          </Typography>
-        </Grid>
         <Grid item xs={2}>
           <Tooltip title={requests.length ? newNotifications : null}>
             <IconButton onClick={handleClick}>
@@ -156,13 +144,24 @@ function ResponsiveDrawer(props) {
             <FriendRequests />
           </Menu>
         </Grid>
+        <Grid item xs={7}>
+          <Typography
+            variant="h5"
+            component="div"
+            sx={{
+              width: "100%",
+            }}>
+            {username}
+          </Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Image />
+        </Grid>
       </Grid>
       <Divider />
       <Box
         sx={{
           width: "100%",
-          // height: '100vh',
-          // scroll: "none",
           overflow: "hidden",
           height: { xs: "100%", sm: "93%", md: "90%" },
         }}>
@@ -182,7 +181,6 @@ function ResponsiveDrawer(props) {
         width: "100%",
         height: {
           xs: "100vh",
-          // sm: "150vh",
           md: "100vh",
           lg: "100vh",
         },
@@ -243,27 +241,7 @@ function ResponsiveDrawer(props) {
         }}
         aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: {
-              xs: "block",
-              sm: "block",
-              md: "none",
-            },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}>
-          {drawer}
-        </Drawer>
+
         <Drawer
           variant="permanent"
           sx={{
@@ -280,22 +258,39 @@ function ResponsiveDrawer(props) {
           open>
           {drawer}
         </Drawer>
+        <Drawer
+          container={container}
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true,
+          }}
+          sx={{
+            display: {
+              xs: "block",
+              sm: "block",
+              md: "none",
+            },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
+          }}>
+          {drawer}
+        </Drawer>
       </Box>
       <Box
         component="main"
         sx={{
           flexGrow: 1,
           p: 0,
-          // width: { sm: `calc(100% - ${drawerWidth}px)` },
           width: { md: `calc(100% - ${drawerWidth}px)` },
           height: {
-            // xs: "1200px",
             xs: "130vh",
             sm: "130vh",
             md: "77vh",
-            // xl: "100vh"
           },
-          // border: "1px solid red"
         }}>
         <Toolbar />
 
