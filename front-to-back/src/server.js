@@ -7,8 +7,8 @@ import { createServer } from "http";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 import { expressMiddleware } from "@apollo/server/express4";
 import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";
 import { parse } from "cookie-parse";
+import cookieParser from "cookie-parser";
 import {} from "dotenv/config";
 
 import typeDefs from "./schema.js";
@@ -37,7 +37,8 @@ const server = async () => {
     {
       schema,
       context: async (ctx) => {
-        const cache = server;
+        const { cache } = server;
+
         const { JWT } = parse(ctx.extra.request.headers.cookie);
 
         let authUser;
@@ -59,6 +60,7 @@ const server = async () => {
 
           authUser = { ...authUser.user, ...fromUserService.user };
         }
+
         const dataSources = {
           authAPI: new AuthAPI({ cache }),
           userAPI: new UserAPI({ cache }),
@@ -76,6 +78,7 @@ const server = async () => {
   const server = new ApolloServer({
     schema,
     introspection: process.env.NODE_ENV !== "production",
+    playground: process.env.NODE_ENV !== "production",
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
 

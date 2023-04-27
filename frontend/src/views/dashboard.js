@@ -21,8 +21,6 @@ function Dashboard() {
         sx={{
           display: "flex",
           flexDirection: "row",
-          // height: { xs: "1300px" },
-          // border: "1px solid red"
         }}>
         <Navbar></Navbar>
       </Stack>

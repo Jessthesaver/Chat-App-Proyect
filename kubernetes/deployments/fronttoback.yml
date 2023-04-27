@@ -26,6 +26,8 @@ spec:
               value: http://auth-service-svc:5000
             - name: API_CHAT
               value: http://chat-service-svc:4500
+            - name: NODE_ENV
+              value: production
           resources:
             limits:
               memory: "512Mi"

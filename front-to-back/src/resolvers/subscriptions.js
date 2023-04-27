@@ -6,7 +6,7 @@ const subscriptions = {
     subscribe: withFilter(
       () => pubSub.asyncIterator(["MESSAGE_CREATED"]),
       async ({ newMessage }, _, { dataSources, authUser }) => {
-        const room = await dataSources.chatAPI.getRoom(newMessage.roomId);
+        const room = await dataSources.chatAPI.getChatRoom(newMessage.chatId);
         const exists = room.members.some(
           (member) => member.username === authUser.username
         );

@@ -462,6 +462,28 @@ const mutations = {
       });
     }
 
+    if (
+      authUser.requests.filter((obj) => {
+        return (
+          obj.from === authUser.username &&
+          obj.to === friendInput.userB[0].username
+        );
+      }).length !== 0 &&
+      authUser.requests.filter((obj) => {
+        return (
+          obj.to === authUser.username &&
+          obj.from === friendInput.userB[0].username
+        );
+      }).length === 0
+    ) {
+      throw new GraphQLError("Internal Error", {
+        extensions: {
+          code: "the user",
+          http: { status: 401 },
+        },
+      });
+    }
+
     const request = {
       userA: { username: authUser.username },
       userB: { username: friendInput.userB[0].username },
