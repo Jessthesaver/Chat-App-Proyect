@@ -240,6 +240,15 @@ const mutations = {
       (user) => user.username === authUser.username
     );
 
+    if (!isMember && !isAdmin) {
+      throw new GraphQLError("Internal Error", {
+        extensions: {
+          code: "BAD_USER_INPUT",
+          http: { status: 400 },
+        },
+      });
+    }
+
     const uniqueMembers = [
       ...new Map(roomInput.members.map((v) => [v.username, v])).values(),
     ];
@@ -478,7 +487,29 @@ const mutations = {
     ) {
       throw new GraphQLError("Internal Error", {
         extensions: {
-          code: "the user",
+          code: "BAD USER INPUT",
+          http: { status: 401 },
+        },
+      });
+    }
+
+    if (
+      authUser.requests.filter((obj) => {
+        return obj.from === friendInput.userB[0].username;
+      }).length === 0
+    ) {
+      throw new GraphQLError("Internal Error", {
+        extensions: {
+          code: "BAD USER INPUT",
+          http: { status: 401 },
+        },
+      });
+    }
+
+    if (authUser.username === friendInput.userB[0].username) {
+      throw new GraphQLError("Internal Error", {
+        extensions: {
+          code: "BAD USER INPUT",
           http: { status: 401 },
         },
       });
@@ -490,6 +521,14 @@ const mutations = {
     };
 
     if (request.userA.username !== authUser.username) {
+      throw new GraphQLError("Internal Error", {
+        extensions: {
+          code: "BAD_USER_INPUT",
+          http: { status: 400 },
+        },
+      });
+    }
+    if (userA.username === userB.username) {
       throw new GraphQLError("Internal Error", {
         extensions: {
           code: "BAD_USER_INPUT",

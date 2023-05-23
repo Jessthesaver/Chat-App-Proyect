@@ -115,13 +115,13 @@ function ResponsiveDrawer(props) {
   const drawer = (
     <Grid
       container
+      justify="center"
       sx={{
-        flexDirection: "column",
         width: "100%",
         height: "100%",
       }}>
       <Grid container sx={navbarStyles.avatar}>
-        <Grid item xs={2}>
+        <Grid item xs={12}>
           <Tooltip title={requests.length ? newNotifications : null}>
             <IconButton onClick={handleClick}>
               <Badge badgeContent={requests.length} color="secondary">
@@ -144,7 +144,7 @@ function ResponsiveDrawer(props) {
             <FriendRequests />
           </Menu>
         </Grid>
-        <Grid item xs={7}>
+        {/* <Grid item xs={7}>
           <Typography
             variant="h5"
             component="div"
@@ -153,8 +153,8 @@ function ResponsiveDrawer(props) {
             }}>
             {username}
           </Typography>
-        </Grid>
-        <Grid item xs={3}>
+        </Grid> */}
+        <Grid item xs={12}>
           <Image />
         </Grid>
       </Grid>
@@ -243,6 +243,7 @@ function ResponsiveDrawer(props) {
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
 
         <Drawer
+          xs={3}
           variant="permanent"
           sx={{
             display: {
@@ -260,6 +261,7 @@ function ResponsiveDrawer(props) {
         </Drawer>
         <Drawer
           container={container}
+          xs={8}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
