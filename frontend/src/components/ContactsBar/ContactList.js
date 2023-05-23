@@ -123,7 +123,7 @@ const ContactList = ({ contacts }) => {
                 component="form"
                 onSubmit={handleSubmit}>
                 <Typography variant={"subtitle1"} gutterBottom>
-                  {"delete Ques"}
+                  {t("deleteQues")}
                 </Typography>
                 <Box sx={contactStyles.buttons}>
                   <Button variant="contained" type="submit">

@@ -28,6 +28,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Outlet, useParams } from "react-router-dom";
 import { useSubscription } from "@apollo/client";
+import { t } from "i18next";
 import FRIEND_REQUEST from "../../graphql/subscriptions/friendRequestgql.js";
 import GROUP_CHANGED from "../../graphql/subscriptions/groupChangeGql.js";
 
@@ -138,7 +139,7 @@ function ResponsiveDrawer(props) {
               "aria-labelledby": "basic-button",
             }}>
             <MenuItem onClick={handleLogout}>
-              <Typography>{"Log out"}</Typography>
+              <Typography>{t("logout")}</Typography>
             </MenuItem>
             <Settings />
             <FriendRequests />
