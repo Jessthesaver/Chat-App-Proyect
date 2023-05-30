@@ -1,11 +1,11 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import CommonButton from "../../common/CommonButton/CommonButton";
 import { useDispatch, useSelector } from "react-redux";
 import { MuiChipsInput } from "mui-chips-input";
 import { useTranslation } from "react-i18next";
 
-const AddMember = ({ currentChat, setOpen }) => {
+function AddMember({ currentChat, setOpen }) {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
@@ -62,7 +62,8 @@ const AddMember = ({ currentChat, setOpen }) => {
 
   return (
     <>
-      <Box
+      <Grid
+        container
         component="form"
         onSubmit={handleSubmit}
         sx={{
@@ -70,9 +71,10 @@ const AddMember = ({ currentChat, setOpen }) => {
           flexDirection: "column",
           p: 1,
         }}>
-        <Typography sx={{ textAlign: "center" }}>{t("addMember")}</Typography>
-        <Typography sx={{ textAlign: "center" }}>{t("fillForm")}</Typography>
-        <Box
+        <Typography textAlign="center">&#8288;{t("addMember")}</Typography>
+        <Typography textAlign="center">&#8288;{t("fillForm")}</Typography>
+        <Grid
+          item
           sx={{
             width: "70%",
             alignSelf: "center",
@@ -99,13 +101,14 @@ const AddMember = ({ currentChat, setOpen }) => {
               },
             }}
           />
-        </Box>
-        <Box
+        </Grid>
+        <Grid
+          item
+          display="flex"
+          p={1}
           sx={{
-            display: "flex",
             gap: "30px",
             justifyContent: "center",
-            padding: 1,
           }}>
           <Button type="submit" variant="contained">
             {t("add")}
@@ -118,10 +121,10 @@ const AddMember = ({ currentChat, setOpen }) => {
             }}>
             {t("cancel")}
           </CommonButton>
-        </Box>
-      </Box>
+        </Grid>
+      </Grid>
     </>
   );
-};
+}
 
 export default AddMember;

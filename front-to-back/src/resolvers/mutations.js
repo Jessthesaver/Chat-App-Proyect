@@ -68,7 +68,7 @@ const mutations = {
       } else if (
         err.extensions.response.body.error.includes("index: username_1")
       ) {
-        throw new GraphQLError("The username has been taked");
+        throw new GraphQLError("The username has been taken");
       }
     }
   },
@@ -244,6 +244,17 @@ const mutations = {
       ...new Map(roomInput.members.map((v) => [v.username, v])).values(),
     ];
 
+    const toFindDuplicates = (uniqueMembers) =>
+      uniqueMembers.filter((item, index) => arr.indexOf(item) !== index);
+
+    if (toFindDuplicates.length > 0) {
+      throw new GraphQLError("Internal Error", {
+        extensions: {
+          code: "BAD_USER_INPUT",
+          http: { status: 400 },
+        },
+      });
+    }
     roomInput.members = uniqueMembers;
     uniqueMembers.map((user) => {
       if (user.username !== authUser.username) {

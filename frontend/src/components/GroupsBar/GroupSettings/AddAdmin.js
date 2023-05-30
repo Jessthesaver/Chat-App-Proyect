@@ -1,6 +1,6 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Grid, Button, Typography } from "@mui/material";
 import { MuiChipsInput } from "mui-chips-input";
-import { useState } from "react";
+import { useState, memo } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import CommonButton from "../../common/CommonButton/CommonButton";
@@ -60,7 +60,7 @@ const AddAdmin = ({ currentChat, setOpen }) => {
 
   return (
     <>
-      <Box
+      <Grid
         component="form"
         onSubmit={handleSubmit}
         sx={{
@@ -68,10 +68,14 @@ const AddAdmin = ({ currentChat, setOpen }) => {
           flexDirection: "column",
           p: 1,
         }}>
-        <Typography sx={{ textAlign: "center" }}>{t("addAdmin")}</Typography>
-        <Typography sx={{ textAlign: "center" }}>{t("fillForm")}</Typography>
+        <Typography sx={{ textAlign: "center" }}>
+          &#8288;{t("addAdmin")}
+        </Typography>
+        <Typography sx={{ textAlign: "center" }}>
+          &#8288;{t("fillForm")}
+        </Typography>
 
-        <Box
+        <Grid
           sx={{
             width: "70%",
             alignSelf: "center",
@@ -98,8 +102,8 @@ const AddAdmin = ({ currentChat, setOpen }) => {
               },
             }}
           />
-        </Box>
-        <Box
+        </Grid>
+        <Grid
           sx={{
             display: "flex",
             gap: "30px",
@@ -117,10 +121,10 @@ const AddAdmin = ({ currentChat, setOpen }) => {
             }}>
             {t("cancel")}
           </CommonButton>
-        </Box>
-      </Box>
+        </Grid>
+      </Grid>
     </>
   );
 };
 
-export default AddAdmin;
+export default memo(AddAdmin);

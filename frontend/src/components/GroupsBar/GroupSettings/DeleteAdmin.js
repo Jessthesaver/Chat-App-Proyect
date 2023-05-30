@@ -67,8 +67,12 @@ const DeleteAdmin = ({ currentChat, setOpen }) => {
           flexDirection: "column",
           p: 1,
         }}>
-        <Typography sx={{ textAlign: "center" }}>{t("removeAdmin")}</Typography>
-        <Typography sx={{ textAlign: "center" }}>{t("fillForm")}</Typography>
+        <Typography sx={{ textAlign: "center" }}>
+          &#8288;{t("removeAdmin")}
+        </Typography>
+        <Typography sx={{ textAlign: "center" }}>
+          &#8288;{t("fillForm")}
+        </Typography>
 
         <Box
           sx={{

@@ -36,6 +36,13 @@ function* signup(action) {
       })
     );
   } catch (error) {
+    console.log(error.message);
+    if (error.message === "The username has been taken") {
+      error.message = t("usernameExistsError");
+    } else if (error.message === "The email has been used") {
+      error.message = t("emailExistsError");
+    }
+
     yield put(setNotification({ error: error.message, severity: "error" }));
   }
 }

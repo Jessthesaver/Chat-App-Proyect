@@ -19,7 +19,7 @@ const ManageLeave = ({ currentChat }) => {
   const [open, setOpen] = useState(false);
 
   const handleLeave = (event) => {
-    // event.preventDefault();
+    event.preventDefault();
 
     let roomInput;
 
