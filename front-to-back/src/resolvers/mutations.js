@@ -240,15 +240,6 @@ const mutations = {
       (user) => user.username === authUser.username
     );
 
-    if (!isMember && !isAdmin) {
-      throw new GraphQLError("Internal Error", {
-        extensions: {
-          code: "BAD_USER_INPUT",
-          http: { status: 400 },
-        },
-      });
-    }
-
     const uniqueMembers = [
       ...new Map(roomInput.members.map((v) => [v.username, v])).values(),
     ];
@@ -394,6 +385,7 @@ const mutations = {
 
     return updatedRoom;
   },
+
   addFriend: async (_, { friendInput }, { dataSources, authUser }) => {
     if (!authUser) {
       throw new GraphQLError("Internal Error", {
@@ -528,7 +520,7 @@ const mutations = {
         },
       });
     }
-    if (userA.username === userB.username) {
+    if (request.userA.username === request.userB.username) {
       throw new GraphQLError("Internal Error", {
         extensions: {
           code: "BAD_USER_INPUT",
@@ -775,6 +767,7 @@ const mutations = {
       return message;
     }
   },
+
   leaveGroup: async (parent, { roomInput }, { dataSources, authUser }) => {
     let removedFromAdmin, removedFromMembers;
     const { _id, admin, members } = roomInput;

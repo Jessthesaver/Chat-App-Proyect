@@ -77,7 +77,7 @@ const DeleteMember = ({ currentChat, setOpen }) => {
             value={chips}
             label={t("members")}
             placeholder={t("typeUsername")}
-            helperText={chips.length > 0 ? t("doubleClickErrorHelp") : ""}
+            helperText={chips.length > 0 ? t("doubleClickHelp") : ""}
             onChange={handleChange}
             validate={handleValidation}
             clearInputOnBlur
