@@ -46,6 +46,7 @@ const ManageLeave = ({ currentChat }) => {
   return (
     <>
       <MenuItem onClick={() => setOpen(true)}>
+        &#8288;
         <Typography>{t("leaveGroup")}</Typography>
       </MenuItem>
 

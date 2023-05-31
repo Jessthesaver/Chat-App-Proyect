@@ -43,7 +43,7 @@ const TagInput = ({ members, setMembers }) => {
           )}>
           {friendsList.map((item) => (
             <MenuItem key={item.username} value={item.username}>
-              {item.username}
+              &#8288;{item.username}
             </MenuItem>
           ))}
         </Select>

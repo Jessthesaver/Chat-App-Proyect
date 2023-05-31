@@ -40,7 +40,7 @@ const ManageDeleteGroup = ({ currentChat }) => {
   return (
     <>
       <MenuItem onClick={() => setOpen(true)}>
-        <Typography>{t("deleteGroup")}</Typography>
+        &#8288; <Typography>{t("deleteGroup")}</Typography>
       </MenuItem>
 
       <Modal open={open}>

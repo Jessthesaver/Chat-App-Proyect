@@ -13,7 +13,7 @@ import {
 import { useState } from "react";
 import PropTypes from "prop-types";
 import CloseIcon from "@mui/icons-material/Close";
-import AddAdmin from "./AddAdmin";
+import AddAdmin from "./AddAdmin2";
 import DeleteAdmin from "./DeleteAdmin";
 import { useTranslation } from "react-i18next";
 
@@ -59,7 +59,8 @@ const ManageAdmins = ({ currentChat }) => {
   return (
     <>
       <MenuItem onClick={() => setOpen(true)}>
-        <Typography>{t("manageAdministrators")}</Typography>
+        &#8288;
+        <Typography>&#8288;{t("manageAdministrators")}</Typography>
       </MenuItem>
       <Modal open={open}>
         <Grid

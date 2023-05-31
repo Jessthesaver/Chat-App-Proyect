@@ -26,6 +26,7 @@ const FriendRequests = () => {
         onClick={() => {
           setOpen(true);
         }}>
+        &#8288;
         <Badge badgeContent={requests.length} color="secondary">
           {t("friendRequest")}
         </Badge>
