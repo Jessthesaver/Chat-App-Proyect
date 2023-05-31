@@ -1,15 +1,15 @@
 import { Button, Grid, Typography } from "@mui/material";
 import { useState } from "react";
-import CommonButton from "../../common/CommonButton/CommonButton";
 import { useDispatch, useSelector } from "react-redux";
 import { MuiChipsInput } from "mui-chips-input";
 import { useTranslation } from "react-i18next";
+import { groupSettingsStyles } from "./styles";
 
-function AddMember({ currentChat, setOpen }) {
+const AddMember = ({ currentChat, setOpen }) => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
-  const { friendsList, rooms } = useSelector((state) => state.user.value);
+  const { contactList, rooms } = useSelector((state) => state.user.value);
 
   const { _id } = currentChat;
   const [chips, setChips] = useState([]);
@@ -42,7 +42,7 @@ function AddMember({ currentChat, setOpen }) {
   };
 
   const handleValidation = (chip) => {
-    const alreadyFriend = friendsList.find(({ username }) => username === chip);
+    const alreadyFriend = contactList.find(({ username }) => username === chip);
 
     const alreadyMember = rooms.reduce((acc, { _id, members }) => {
       if (_id === currentChat._id) {
@@ -66,19 +66,12 @@ function AddMember({ currentChat, setOpen }) {
         container
         component="form"
         onSubmit={handleSubmit}
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          p: 1,
-        }}>
-        <Typography textAlign="center">&#8288;{t("addMember")}</Typography>
-        <Typography textAlign="center">&#8288;{t("fillForm")}</Typography>
-        <Grid
-          item
-          sx={{
-            width: "70%",
-            alignSelf: "center",
-          }}>
+        pt={6}
+        flexBasis="column"
+        sx={groupSettingsStyles.gridContainer}>
+        <Typography textAlign="center">{t("addMember")}</Typography>
+        <Typography textAlign="center">{t("fillForm")}</Typography>
+        <Grid item sx={groupSettingsStyles.chipField}>
           <MuiChipsInput
             name="addMembers"
             value={chips}
@@ -91,40 +84,25 @@ function AddMember({ currentChat, setOpen }) {
             inputProps={{
               maxLength: 25,
             }}
-            sx={{
-              width: "100%",
-              "& .MuiChipsInput-Chip": {
-                backgroundColor: "rgba(175, 173, 222, 0.8)",
-              },
-              "& .MuiChipsInput-Chip-Editing": {
-                color: "white",
-              },
-            }}
+            sx={groupSettingsStyles.MuiChips}
           />
         </Grid>
-        <Grid
-          item
-          display="flex"
-          p={1}
-          sx={{
-            gap: "30px",
-            justifyContent: "center",
-          }}>
+        <Grid item display="flex" p={1} sx={groupSettingsStyles.modalButtons}>
           <Button type="submit" variant="contained">
             {t("add")}
           </Button>
-          <CommonButton
+          <Button
             variant="outlined"
             onClick={(event) => {
               event.preventDefault();
               return setOpen(false);
             }}>
             {t("cancel")}
-          </CommonButton>
+          </Button>
         </Grid>
       </Grid>
     </>
   );
-}
+};
 
 export default AddMember;

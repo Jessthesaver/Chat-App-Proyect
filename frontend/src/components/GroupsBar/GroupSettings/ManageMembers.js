@@ -52,14 +52,13 @@ export default function ManageMembers({ currentChat }) {
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (event, newValue) => {
-    event.preventDefault();
     setValue(newValue);
   };
 
   return (
     <>
       <MenuItem onClick={() => setOpen(true)}>
-        <Typography textAlign="center">&#8288;{t("manageMembers")}</Typography>
+        <Typography>{t("manageMembers")}</Typography>
       </MenuItem>
       <Modal open={open}>
         <Grid
@@ -79,7 +78,6 @@ export default function ManageMembers({ currentChat }) {
             item
             xs={12}
             sx={{
-              display: "flex",
               margin: 0,
               padding: 0,
               justifyContent: "right",
@@ -129,4 +127,3 @@ export default function ManageMembers({ currentChat }) {
     </>
   );
 }
-// export default ManageMembers;

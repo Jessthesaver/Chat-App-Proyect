@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -30,31 +30,17 @@ const ConvBar = () => {
 
   if (rooms && rooms.length > 0) {
     return (
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          width: "100%",
-          margin: 0,
-          padding: 0,
-        }}>
+      <Grid container flexDirection="column">
         <ConvTabHeader open={open} setOpen={setOpen} filterData={filterData} />
         <ConvTabContent rooms={currentRooms} />
-      </Box>
+      </Grid>
     );
   } else if (rooms && rooms.length === 0) {
     return (
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          width: "100%",
-          margin: 0,
-          padding: 0,
-        }}>
+      <Grid container flexDirection="column">
         <ConvTabHeader open={open} setOpen={setOpen} />
         <Typography>{t("noConversations")}</Typography>
-      </Box>
+      </Grid>
     );
   }
 };

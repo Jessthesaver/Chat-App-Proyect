@@ -1,9 +1,9 @@
-import { Grid, Button, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import { MuiChipsInput } from "mui-chips-input";
-import { useState, memo } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import CommonButton from "../../common/CommonButton/CommonButton";
+import { groupSettingsStyles } from "./styles";
 
 const AddAdmin = ({ currentChat, setOpen }) => {
   const { t } = useTranslation();
@@ -61,25 +61,15 @@ const AddAdmin = ({ currentChat, setOpen }) => {
   return (
     <>
       <Grid
+        container
         component="form"
         onSubmit={handleSubmit}
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          p: 1,
-        }}>
-        <Typography sx={{ textAlign: "center" }}>
-          &#8288;{t("addAdmin")}
-        </Typography>
-        <Typography sx={{ textAlign: "center" }}>
-          &#8288;{t("fillForm")}
-        </Typography>
+        pt={6}
+        sx={groupSettingsStyles.gridContainer}>
+        <Typography sx={{ textAlign: "center" }}>{t("addAdmin")}</Typography>
+        <Typography sx={{ textAlign: "center" }}>{t("fillForm")}</Typography>
 
-        <Grid
-          sx={{
-            width: "70%",
-            alignSelf: "center",
-          }}>
+        <Grid item sx={groupSettingsStyles.chipField}>
           <MuiChipsInput
             name="addAdmin"
             value={chips}
@@ -92,39 +82,26 @@ const AddAdmin = ({ currentChat, setOpen }) => {
             inputProps={{
               maxLength: 25,
             }}
-            sx={{
-              width: "100%",
-              "& .MuiChipsInput-Chip": {
-                backgroundColor: "rgba(175, 173, 222, 0.8)",
-              },
-              "& .MuiChipsInput-Chip-Editing": {
-                color: "white",
-              },
-            }}
+            sx={groupSettingsStyles.MuiChips}
           />
         </Grid>
-        <Grid
-          sx={{
-            display: "flex",
-            gap: "30px",
-            justifyContent: "center",
-            padding: 1,
-          }}>
+
+        <Grid item p={1} sx={groupSettingsStyles.modalButtons}>
           <Button type="submit" variant="contained">
             {t("add")}
           </Button>
-          <CommonButton
+          <Button
             variant="outlined"
             onClick={(event) => {
               event.preventDefault();
               return setOpen(false);
             }}>
             {t("cancel")}
-          </CommonButton>
+          </Button>
         </Grid>
       </Grid>
     </>
   );
 };
 
-export default memo(AddAdmin);
+export default AddAdmin;

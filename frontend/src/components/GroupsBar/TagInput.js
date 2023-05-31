@@ -1,4 +1,3 @@
-import Box from "@mui/material/Box";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -8,6 +7,7 @@ import Chip from "@mui/material/Chip";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { contactStyles } from "../ContactsBar/styles";
+import { Grid } from "@mui/material";
 
 const TagInput = ({ members, setMembers }) => {
   const { t } = useTranslation();
@@ -23,10 +23,7 @@ const TagInput = ({ members, setMembers }) => {
 
   return (
     <div>
-      <FormControl
-        sx={contactStyles.inputFields}
-        // sx={{ mt: 2, width: { xs: 150, sm: 300 } }}
-      >
+      <FormControl sx={contactStyles.inputFields}>
         <InputLabel>{t("members")}</InputLabel>
         <Select
           multiple
@@ -34,11 +31,15 @@ const TagInput = ({ members, setMembers }) => {
           onChange={handleChange}
           input={<OutlinedInput label={t("members")} />}
           renderValue={(selected) => (
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+            <Grid sx={{ flexWrap: "wrap", gap: 0.5 }}>
               {selected.map((value) => (
-                <Chip key={value} label={value} color="primary" />
+                <Chip
+                  key={value}
+                  label={value}
+                  // color="primary"
+                />
               ))}
-            </Box>
+            </Grid>
           )}>
           {friendsList.map((item) => (
             <MenuItem key={item.username} value={item.username}>

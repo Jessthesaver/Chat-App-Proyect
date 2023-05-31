@@ -1,7 +1,6 @@
 import { Box, Button, MenuItem, Modal, Typography } from "@mui/material";
 import { useState } from "react";
 import { contactStyles } from "../../ContactsBar/styles";
-import CommonButton from "../../common/CommonButton/CommonButton";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -18,18 +17,17 @@ const ManageLeave = ({ currentChat }) => {
 
   const [open, setOpen] = useState(false);
 
-  const handleLeave = (event) => {
-    event.preventDefault();
-
+  const handleLeave = () => {
     let roomInput;
+    const isAdmin = admin.includes(username);
 
-    if (admin.includes(username)) {
+    if (isAdmin) {
       roomInput = {
         _id,
         admin: [{ username }],
         members: [{ username }],
       };
-    } else if (!admin.includes(username)) {
+    } else if (!isAdmin) {
       roomInput = {
         _id,
         admin: null,
@@ -57,22 +55,17 @@ const ManageLeave = ({ currentChat }) => {
             {t("leaveGroupQues")}
           </Typography>
           <Box sx={contactStyles.buttons}>
-            <Button
-              key={_id}
-              type="submit"
-              variant="contained"
-              // onClick={handleLeave}
-            >
+            <Button key={_id} type="submit" variant="contained">
               {t("leave")}
             </Button>
-            <CommonButton
+            <Button
               variant="outlined"
               onClick={(event) => {
                 event.preventDefault();
                 return setOpen(false);
               }}>
               {t("cancel")}
-            </CommonButton>
+            </Button>
           </Box>
         </Box>
       </Modal>
